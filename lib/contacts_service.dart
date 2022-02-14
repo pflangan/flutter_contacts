@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
@@ -179,24 +180,24 @@ enum FormOperationErrorCode {
 }
 
 class Contact {
-  Contact({
-    this.displayName,
-    this.givenName,
-    this.middleName,
-    this.prefix,
-    this.suffix,
-    this.familyName,
-    this.company,
-    this.jobTitle,
-    this.emails,
-    this.phones,
-    this.postalAddresses,
-    this.avatar,
-    this.birthday,
-    this.androidAccountType,
-    this.androidAccountTypeRaw,
-    this.androidAccountName,
-  });
+  Contact(
+      {this.displayName,
+      this.givenName,
+      this.middleName,
+      this.prefix,
+      this.suffix,
+      this.familyName,
+      this.company,
+      this.jobTitle,
+      this.emails,
+      this.phones,
+      this.postalAddresses,
+      this.avatar,
+      this.birthday,
+      this.androidAccountType,
+      this.androidAccountTypeRaw,
+      this.androidAccountName,
+      this.bgColor});
 
   String? identifier,
       displayName,
@@ -207,6 +208,7 @@ class Contact {
       familyName,
       company,
       jobTitle;
+  Color? bgColor;
   String? androidAccountTypeRaw, androidAccountName;
   AndroidAccountType? androidAccountType;
   List<Item>? emails = [];
@@ -231,6 +233,7 @@ class Contact {
     suffix = m["suffix"];
     company = m["company"];
     jobTitle = m["jobTitle"];
+    bgColor = m["bgColor"]
     androidAccountTypeRaw = m["androidAccountType"];
     androidAccountType = accountTypeFromString(androidAccountTypeRaw);
     androidAccountName = m["androidAccountName"];
@@ -281,7 +284,8 @@ class Contact {
       "phones": phones,
       "postalAddresses": postalAddresses,
       "avatar": contact.avatar,
-      "birthday": birthday
+      "birthday": birthday,
+      "bgColor": contact.bgColor
     };
   }
 
@@ -300,6 +304,7 @@ class Contact {
         jobTitle: this.jobTitle ?? other.jobTitle,
         androidAccountType: this.androidAccountType ?? other.androidAccountType,
         androidAccountName: this.androidAccountName ?? other.androidAccountName,
+        bgColor: this.bgColor ?? other.bgColor,
         emails: this.emails == null
             ? other.emails
             : this
@@ -341,6 +346,7 @@ class Contact {
         this.middleName == other.middleName &&
         this.prefix == other.prefix &&
         this.suffix == other.suffix &&
+        this.bgColor == other.bgColor &&
         this.birthday == other.birthday &&
         DeepCollectionEquality.unordered().equals(this.phones, other.phones) &&
         DeepCollectionEquality.unordered().equals(this.emails, other.emails) &&
@@ -363,6 +369,7 @@ class Contact {
       this.prefix,
       this.suffix,
       this.birthday,
+      this.bgColor
     ].where((s) => s != null));
   }
 
