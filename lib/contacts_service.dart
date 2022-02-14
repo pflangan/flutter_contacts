@@ -233,7 +233,7 @@ class Contact {
     suffix = m["suffix"];
     company = m["company"];
     jobTitle = m["jobTitle"];
-    bgColor = m["bgColor"]
+    bgColor = m["bgColor"];
     androidAccountTypeRaw = m["androidAccountType"];
     androidAccountType = accountTypeFromString(androidAccountTypeRaw);
     androidAccountName = m["androidAccountName"];
